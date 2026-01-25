@@ -6,7 +6,7 @@ Feature: Blinkit Product Search
 
     Examples:
       | category | productName |
-      | Bread    | Harvest Gold White Bread |
+      | Bread    | English Oven Milk Bread |
 #      | Namkeen  | Haldiram's Bhujia |
 #      | Biscuits | Parle Marie Biscuits |
 #      | Kurkure  | Kurkure Masala Munch Crisps |

@@ -13,46 +13,54 @@ import java.util.List;
 
 public class SearchPage {
 
-    @FindBy(xpath = "//input[@placeholder='Search for']")
-    private WebElement searchBox;
+    // Step 1: Wrapper (always visible)
+    @FindBy(xpath = "//div[contains(@class,'SearchBar__AnimationWrapper')]")
+    private WebElement searchWrapper;
 
-    // All real product cards
+    // Step 2: Real input (appears after click)
+    @FindBy(xpath = "//input[contains(@class,'SearchBarContainer__Input')]")
+    private WebElement searchInput;
+
+//    @FindBy(xpath = "//div[@role='button' and contains(@class,'tw-relative') and contains(@class,'tw-h-full')]")
+//    private List<WebElement> productCards;
+
     @FindBy(xpath = "//div[@role='button' and contains(@class,'tw-relative') and contains(@class,'tw-h-full')]")
     private List<WebElement> productCards;
-
-//    // Product name inside each card
-//    @FindBy(xpath = ".//div[contains(@class,'tw-text-300') and contains(@class,'tw-font-semibold')]")
-//    private WebElement productText; // used via relative search
 
     public SearchPage(){
         PageFactory.initElements(DriverFactory.getDriver(), this);
     }
 
     public void searchProduct(String item){
+
+        // Open search
         WaitUtil.getWait()
-                .until(ExpectedConditions.visibilityOf(this.searchBox))
-                .clear();
-        this.searchBox.sendKeys(item);
+                .until(ExpectedConditions.elementToBeClickable(searchWrapper))
+                .click();
+
+        // Now input becomes visible
+        WaitUtil.getWait()
+                .until(ExpectedConditions.visibilityOf(searchInput))
+                .sendKeys(item);
     }
 
     public void selectProductByName(String productName){
 
         WaitUtil.getWait()
-                .until(ExpectedConditions.visibilityOfAllElements(this.productCards));
+                .until(ExpectedConditions.visibilityOfAllElements(productCards));
 
-        for (WebElement product : this.productCards) {
+        System.out.println("productCards and its length--"+productCards+" "+productCards.size());
 
-            // relative find inside each card
+        for (WebElement product : productCards) {
+
             WebElement nameElement =
-                    product.findElement(
-                            By.xpath(
-                                    ".//div[contains(@class,'tw-text-300') and contains(@class,'tw-font-semibold')]"
-                            )
-                    );
-
+                    product.findElement(By.xpath(
+                            ".//div[contains(@class,'tw-text-300')   and contains(@class,'tw-font-semibold')   and contains(@class,'tw-line-clamp-2')]"
+                    ));
+            System.out.println("getElement from grid-->"+nameElement.getText());
             String actualName = nameElement.getText().trim();
 
-            if (actualName.equalsIgnoreCase(productName)) {
+            if (actualName.toLowerCase().contains(productName.toLowerCase())) {
                 ScrollUtil.scrollToElement(product);
                 WaitUtil.getWait()
                         .until(ExpectedConditions.elementToBeClickable(product));
