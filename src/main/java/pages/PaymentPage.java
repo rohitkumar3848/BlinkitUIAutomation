@@ -7,18 +7,18 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import utils.WaitUtil;
 
-public class CartPage {
+public class PaymentPage {
 
-    @FindBy(xpath = "//div[text()='Proceed']")
-    private WebElement proceedToPayBtn;
+    @FindBy(xpath = "//div[text()='Select delivery address']")
+    private WebElement paymentHeader;
 
-    public CartPage(){
+    public PaymentPage(){
         PageFactory.initElements(DriverFactory.getDriver(), this);
     }
 
-    public void proceedToPay(){
-        WaitUtil.getWait()
-                .until(ExpectedConditions.elementToBeClickable(proceedToPayBtn))
-                .click();
+    public boolean isPaymentPageOpened(){
+        return WaitUtil.getWait()
+                .until(ExpectedConditions.visibilityOf(paymentHeader))
+                .isDisplayed();
     }
 }
