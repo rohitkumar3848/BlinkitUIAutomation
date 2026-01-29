@@ -10,9 +10,9 @@ Feature: Complete Blinkit Order Flow
 
     Examples:
       | category | productName |
-      | Namkeen  | Haldiram's Nagpur Sev Bhujia  |
-#      | Bread    | English Oven Milk Bread |
-
-#      | Biscuits | Parle Marie Biscuits |
+     | Namkeen  | Haldiram's Nagpur Sev Bhujia  |
+#     | Bread    | English Oven Milk Bread |
+#
+#     | Biscuits | Parle-G Glucose Biscuit |
 #      | Kurkure  | Kurkure Masala Munch Crisps |
-#      | Milk     | Amul Gold Full Cream Milk |
+#    | Milk     | Amul Gold Milk |
