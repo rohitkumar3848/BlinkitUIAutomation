@@ -1,5 +1,10 @@
 Feature: Complete Blinkit Order Flow
 
+  Background:
+    Given user launches website url
+    And user logs in successfully
+
+
   Scenario Outline: Search product and place order
     When user searches product "<category>"
     And user selects product "<productName>"
@@ -11,8 +16,8 @@ Feature: Complete Blinkit Order Flow
     Examples:
       | category | productName |
      | Namkeen  | Haldiram's Nagpur Sev Bhujia  |
-#     | Bread    | English Oven Milk Bread |
-#
-#     | Biscuits | Parle-G Glucose Biscuit |
-#      | Kurkure  | Kurkure Masala Munch Crisps |
-#    | Milk     | Amul Gold Milk |
+     | Bread    | English Oven Milk Bread |
+
+     | Biscuits | Parle-G Glucose Biscuit |
+      | Kurkure  | Kurkure Masala Munch Crisps |
+    | Milk     | Amul Gold Milk |
