@@ -10,6 +10,7 @@ import pages.LocationPage;
 import pages.LoginPage;
 import utils.ConfigReader;
 import utils.NavigationUtil;
+import utils.ScreenshotUtil;
 
 public class LoginSteps {
 
@@ -34,5 +35,8 @@ public class LoginSteps {
         Thread.sleep(20000); // manual OTP
         Assert.assertTrue(true);
         Hooks.extentTest.log(Status.PASS, "User logged in successfully");
+        ScreenshotUtil.screenShot("HomePage");
+        String path="./Screenshot/HomePage.png";
+        Hooks.extentTest.addScreenCaptureFromPath(path);
     }
 }

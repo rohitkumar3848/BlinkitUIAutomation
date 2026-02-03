@@ -19,36 +19,9 @@ public class Hooks {
 
     @Before
     public void setUp(Scenario scenario) {
-
-
         DriverFactory.initDriver();
-
         extentTest = extentReports.createTest(scenario.getName());
         extentTest.info("Browser opened");
-
-
-//        //Navigation
-//        String title = ConfigReader.get("title");
-//        NavigationUtil.navigateToHome(title);
-//
-//        // ---- AUTO LOGIN FLOW ----
-//        LocationPage locationPage = new LocationPage();
-//        locationPage.detectLocation();
-//
-//        HomePage homePage = new HomePage();
-//        homePage.clickLogin();
-//
-//        LoginPage loginPage = new LoginPage();
-//        loginPage.enterMobileNumber(ConfigReader.get("mobile"));
-//        loginPage.clickContinue();
-
-//        try {
-//            Thread.sleep(20000); // manual OTP
-//        } catch (Exception e) {}
-
-
-//        extentTest = extentReports.createTest(scenario.getName());
-//        extentTest.info("Browser opened and Blinkit launched");
     }
 
     @BeforeStep
@@ -71,6 +44,9 @@ public class Hooks {
         if (scenario.isFailed()) {
             ScreenshotUtil.screenShot(scenario.getName());
         }
+        ScreenshotUtil.screenShot("LastPage");
+        String path="./Screenshot/LastPage.png";
+        extentTest.addScreenCaptureFromPath(path);
         DriverFactory.quitDriver();
         extentReports.flush();
     }

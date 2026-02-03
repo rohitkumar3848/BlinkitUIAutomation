@@ -11,7 +11,6 @@ public class ExtentManager {
             ExtentSparkReporter spark=new ExtentSparkReporter("target/ExtentReport.html");
             spark.config().setDocumentTitle(ConfigReader.get("reportTitle"));
             spark.config().setReportName(ConfigReader.get("reportName"));
-
             extentReports=new ExtentReports();
             extentReports.attachReporter(spark);
         }
